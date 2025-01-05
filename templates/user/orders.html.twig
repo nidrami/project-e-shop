@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Orders{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>My Orders</h1>
+
+    {% if orders|length > 0 %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.createdAt|date('Y-m-d H:i:s') }}</td>
+                            <td>
+                                <span class="badge bg-{{ order.status == 'completed' ? 'success' : 'warning' }}">
+                                    {{ order.status|title }}
+                                </span>
+                            </td>
+                            <td>{{ order.total }}€</td>
+                            <td>
+                                <a href="{{ path('order_details', {'id': order.id}) }}" class="btn btn-sm btn-info">
+                                    View Details
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <p class="mb-0">You haven't placed any orders yet.</p>
+        </div>
+        <a href="{{ path('product_list') }}" class="btn btn-primary">Start Shopping</a>
+    {% endif %}
+</div>
+{% endblock %} 

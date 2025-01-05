@@ -1,0 +1,8 @@
+<h1>Customer List</h1>
+<ul>
+    {% for customer in customers %}
+        <li>
+            <a href="{{ path('customer_detail', {id: customer.id}) }}">{{ customer.name }}</a>
+        </li>
+    {% endfor %}
+</ul>

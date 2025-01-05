@@ -1,0 +1,15 @@
+{# templates/product/list.html.twig #}
+
+<h1>Product List</h1>
+<ul>
+    {% for product in products %}
+        <li>
+            <a href="{{ path('product_detail', { 'id': product.id }) }}">
+                {{ product.name }} - {{ product.price }} USD
+            </a>
+        </li>
+    {% else %}
+        <p>No products available</p>
+    {% endfor %}
+</ul>
+<a href="{{ path('product_add') }}">Add a New Product</a>

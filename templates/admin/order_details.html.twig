@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Details #{{ order.id }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Order #{{ order.id }}</h1>
+        <div class="btn-group">
+            {% if order.status == 'pending' %}
+                <form action="{{ path('admin_order_validate', {'id': order.id}) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-success me-2">Validate Order</button>
+                </form>
+                <form action="{{ path('admin_order_decline', {'id': order.id}) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to decline this order?')">Decline Order</button>
+                </form>
+            {% else %}
+                <div class="badge bg-{{ order.status == 'validated' ? 'success' : 'danger' }} p-2">
+                    {{ order.status|upper }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Customer Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Email:</strong> {{ order.user.email }}</p>
+            <p><strong>Order Date:</strong> {{ order.createdAt|date('Y-m-d H:i:s') }}</p>
+            <p><strong>Status:</strong> {{ order.status|upper }}</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Order Items</h5>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>€{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>€{{ item.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3">Total</th>
+                        <th>€{{ order.total }}</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('admin_orders') }}" class="btn btn-secondary">Back to Orders</a>
+    </div>
+</div>
+{% endblock %} 

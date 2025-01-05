@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>{{ category.name }}</h1>
+    
+    {% if products|length > 0 %}
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if product.image %}
+                            <img src="{{ asset('uploads/images/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.price }}€</p>
+                            <a href="{{ path('product_detail', {'id': product.id}) }}" class="btn btn-primary">View Details</a>
+                            <a href="{{ path('cart_add', {'id': product.id}) }}" class="btn btn-success">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No products found in this category.</p>
+    {% endif %}
+</div>
+{% endblock %} 

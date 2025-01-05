@@ -1,0 +1,69 @@
+/* Reset default background color */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Card animations and styling */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Button animations */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Product image hover effect */
+.product-image {
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Price tag styling */
+.price-tag {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Category badge styling */
+.category-badge {
+    background-color: #e9ecef;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    color: #495057;
+    font-size: 0.875rem;
+}
+
+/* Stock status indicator */
+.stock-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.in-stock {
+    color: #198754;
+    background-color: #d1e7dd;
+}
+
+.out-of-stock {
+    color: #dc3545;
+    background-color: #f8d7da;
+}

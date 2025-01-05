@@ -1,0 +1,26 @@
+<form method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('add_product') }}">
+    <label for="name">Product Name:</label>
+    <input type="text" name="name" required />
+
+    <label for="price">Price:</label>
+    <input type="number" name="price" step="0.01" required />
+
+    <label for="description">Description:</label>
+    <textarea name="description"></textarea>
+
+    <label for="stock">Stock:</label>
+    <input type="number" name="stock" required />
+
+    <label for="category">Category:</label>
+    <select name="category">
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="image">Image:</label>
+    <input type="file" name="image" />
+
+    <button type="submit">Add Product</button>
+</form>
